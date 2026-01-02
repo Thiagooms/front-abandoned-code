@@ -4,6 +4,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { postService, categoryService } from '../../services/api';
 import type { PostRequest } from '../../types/api';
+import { queryKeys } from '../../constants/queryKeys';
+import { Loading } from '../../components/common/Loading';
+import { ErrorMessage } from '../../components/common/ErrorMessage';
+import { getErrorMessage } from '../../utils/errorHandler';
 import './PostForm.css';
 
 export function PostForm() {
@@ -15,20 +19,20 @@ export function PostForm() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<PostRequest>();
 
   const { data: post, isLoading: isLoadingPost } = useQuery({
-    queryKey: ['post', id],
+    queryKey: queryKeys.posts.byId(id!),
     queryFn: () => postService.getById(Number(id)),
     enabled: isEditMode,
   });
 
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
-    queryKey: ['categories'],
+    queryKey: queryKeys.categories.all,
     queryFn: categoryService.getAll,
   });
 
   const createMutation = useMutation({
     mutationFn: postService.create,
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.posts.all });
       navigate(`/admin/posts/${data.id}`);
     },
   });
@@ -36,8 +40,8 @@ export function PostForm() {
   const updateMutation = useMutation({
     mutationFn: (data: PostRequest) => postService.update(Number(id), data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['posts'] });
-      queryClient.invalidateQueries({ queryKey: ['post', id] });
+      queryClient.invalidateQueries({ queryKey: queryKeys.posts.all });
+      queryClient.invalidateQueries({ queryKey: queryKeys.posts.byId(id!) });
       navigate(`/admin/posts/${data.id}`);
     },
   });
@@ -71,7 +75,7 @@ export function PostForm() {
   const isSaving = createMutation.isPending || updateMutation.isPending;
 
   if (isLoading) {
-    return <div className="loading">Carregando...</div>;
+    return <Loading />;
   }
 
   return (
@@ -97,7 +101,7 @@ export function PostForm() {
 
         <div className="form-group">
           <label htmlFor="categoryId">Categoria</label>
-          <select id="categoryId" {...register('categoryId')}>
+          <select id="categoryId" {...register('categoryId', { valueAsNumber: true })}>
             <option value="">Sem categoria</option>
             {categories?.map(category => (
               <option key={category.id} value={category.id}>
@@ -132,9 +136,7 @@ export function PostForm() {
         </div>
 
         {(createMutation.error || updateMutation.error) && (
-          <div className="error">
-            Erro ao salvar: {(createMutation.error || updateMutation.error)?.message}
-          </div>
+          <ErrorMessage message={`Erro ao salvar: ${getErrorMessage(createMutation.error || updateMutation.error)}`} />
         )}
 
         <div className="form-actions">

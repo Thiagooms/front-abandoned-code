@@ -41,3 +41,7 @@ export interface ErrorResponse {
   message: string;
   timestamp: string;
 }
+
+export interface CategoryTree extends CategoryResponse {
+  children?: CategoryTree[];
+}

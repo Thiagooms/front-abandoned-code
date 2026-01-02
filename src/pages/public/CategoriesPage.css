@@ -1,0 +1,6 @@
+/*
+  The styles for this page now follow the pattern of Home.css
+  by reusing classes like .home-modern, .home-modern-title, etc.
+  The specific styles for category cards are in components/categories/CategoryCard.css.
+  This file is kept for any potential page-specific overrides in the future.
+*/

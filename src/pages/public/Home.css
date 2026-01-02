@@ -1,132 +1,108 @@
-.home {
-  max-width: 1000px;
-}
-
-.home-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.home-header h1 {
+.home-modern {
+  width: 100%;
+  max-width: 1200px;
   margin: 0;
-  color: var(--gray-900);
+  padding: 2rem 2rem 2rem 7rem;
 }
 
-.posts-grid {
-  display: grid;
-  gap: 1.5rem;
+.search-container {
+  position: relative;
+  max-width: 400px; /* Global max-width for search container */
 }
 
-.post-card {
-  background: white;
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  transition: all 0.3s;
-  border: 1px solid transparent;
-  max-width: 100%;
-  overflow: hidden;
+.search-input {
+  width: 100%;
+  padding: 1rem 1.25rem 1rem 3.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.2s;
 }
 
-.post-card:hover {
-  box-shadow: var(--shadow-lg);
-  border-color: var(--gray-200);
-  transform: translateY(-2px);
+.search-input::placeholder {
+  color: var(--text-tertiary);
 }
 
-.post-card-header {
+.search-input:focus {
+  outline: none;
+  border-color: var(--text-tertiary);
+  background: var(--surface-hover);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.home-modern-header {
+  margin-bottom: 3rem; /* Reduced margin */
+}
+
+.home-modern-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; /* Set font-size to 12px */
+  font-weight: 400; /* Set font-weight to regular */
+  color: var(--text);
+  margin-bottom: 19px; /* This was from previous request, kept */
+  opacity: 0.5; /* Ensure opacity is 0.5 */
+}
+
+.posts-list-modern {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
+  flex-direction: column;
+  gap: 15px; /* Decreased spacing between cards */
 }
 
-.post-card-meta {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+.home-modern-empty {
+  background: var(--surface);
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  text-align: center;
 }
 
-.post-category {
-  background-color: var(--primary);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-
-.post-views {
-  color: var(--gray-500);
-  font-size: 0.875rem;
-}
-
-.post-card-title {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  margin-bottom: 0.75rem;
-}
-
-.post-card-title h2 {
-  font-size: 1.5rem;
-  color: var(--gray-900);
+.home-modern-empty p {
+  color: var(--text-secondary);
+  font-size: 1rem;
   margin: 0;
-  transition: color 0.2s;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
 }
 
-.post-card-title:hover h2 {
-  color: var(--primary);
-}
-
-.post-card-excerpt {
-  color: var(--gray-600);
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-}
-
-.post-card-footer {
+.home-modern-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
   padding-top: 1rem;
-  border-top: 1px solid var(--gray-200);
 }
 
-.post-date {
-  color: var(--gray-500);
-  font-size: 0.875rem;
-}
-
-.post-actions {
-  display: flex;
-  gap: 0.5rem;
+.next-page-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
-  .home-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+  .home-modern {
+    padding: 1rem;
   }
 
-  .post-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
+.home-modern-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; /* Decreased font size to 12px */
+  font-weight: 400; /* Changed to regular */
+  color: var(--text);
+  margin-bottom: 19px;
+  opacity: 0.5;
+}
 
-  .post-actions {
-    width: 100%;
-  }
-
-  .post-actions .btn {
-    flex: 1;
-  }
+.search-container {
+  position: relative;
+  max-width: 400px; /* Adjusted max-width */
+}
 }

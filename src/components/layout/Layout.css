@@ -19,9 +19,20 @@
   min-width: 0;
 }
 
+.public-layout .layout-container {
+  margin-left: 311px;
+  margin-right: auto;
+  width: calc(100% - 311px);
+}
+
 @media (max-width: 768px) {
   .layout-container {
     flex-direction: column;
     padding: 1rem;
+  }
+
+  .public-layout .layout-container {
+    margin-left: 0;
+    width: 100%;
   }
 }

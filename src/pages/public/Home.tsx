@@ -1,7 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { postService } from '../../services/api';
-import type { PostResponse } from '../../types/api';
+import { queryKeys } from '../../constants/queryKeys';
+import { Loading } from '../../components/common/Loading';
+import { ErrorMessage } from '../../components/common/ErrorMessage';
+import { getErrorMessage } from '../../utils/errorHandler';
+import { PostCard } from '../../components/posts/PostCard';
+import { SearchInput } from '../../components/common/SearchInput';
 import './Home.css';
 
 export function Home() {
@@ -9,7 +14,7 @@ export function Home() {
   const statusFilter = searchParams.get('status');
 
   const { data: posts, isLoading, error } = useQuery({
-    queryKey: ['posts', statusFilter],
+    queryKey: queryKeys.posts.byStatus(statusFilter),
     queryFn: postService.getAll,
   });
 
@@ -19,65 +24,34 @@ export function Home() {
   }) || [];
 
   if (isLoading) {
-    return <div className="loading">Carregando posts...</div>;
+    return <Loading />;
   }
 
   if (error) {
-    return <div className="error">Erro ao carregar posts: {(error as Error).message}</div>;
+    return <ErrorMessage message={`Erro ao carregar posts: ${getErrorMessage(error)}`} />;
   }
 
   return (
-    <div className="home">
-      <div className="home-header">
-        <h1>Blog</h1>
+    <div className="home-modern">
+      <div className="home-modern-header">
+        <SearchInput /> {/* Use the new SearchInput component */}
       </div>
 
-      {filteredPosts.length === 0 ? (
-        <div className="card">
-          <p style={{ textAlign: 'center', color: 'var(--gray-500)' }}>
-            Nenhum post publicado ainda.
-          </p>
-        </div>
-      ) : (
-        <div className="posts-grid">
-          {filteredPosts.map(post => (
-            <article key={post.id} className="post-card">
-              <div className="post-card-header">
-                <div className="post-card-meta">
-                  {post.category && (
-                    <span className="post-category">{post.category.name}</span>
-                  )}
-                </div>
-                <span className="post-views">{post.viewCount} views</span>
-              </div>
+      <section className="home-modern-content">
+        <h2 className="home-modern-title">PUBLICAÇÕES RECENTES</h2>
 
-              <Link to={`/posts/${post.id}`} className="post-card-title">
-                <h2>{post.title}</h2>
-              </Link>
-
-              <p className="post-card-excerpt">{post.excerpt}</p>
-
-              <div className="post-card-footer">
-                <time className="post-date">
-                  {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'short',
-                    year: 'numeric',
-                  }) : new Date(post.createdAt).toLocaleDateString('pt-BR', {
-                    day: '2-digit',
-                    month: 'short',
-                    year: 'numeric',
-                  })}
-                </time>
-
-                <Link to={`/posts/${post.id}`} className="btn btn-sm btn-primary">
-                  Ler mais
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      )}
+        {filteredPosts.length === 0 ? (
+          <div className="home-modern-empty">
+            <p>Nenhum post publicado ainda.</p>
+          </div>
+        ) : (
+          <div className="posts-list-modern">
+            {filteredPosts.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }

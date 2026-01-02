@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams, Link } from 'react-router-dom';
 import { postService } from '../../services/api';
-import type { PostResponse } from '../../types/api';
 import './AdminHome.css';
 
 export function AdminHome() {

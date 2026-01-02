@@ -11,14 +11,15 @@
 
 .categories-header h1 {
   margin: 0;
-  color: var(--gray-900);
+  color: #ffffff;
 }
 
 .categories-list {
-  background: white;
+  background: #161616;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   overflow: hidden;
+  border: 1px solid #272727;
 }
 
 .category-item {
@@ -26,7 +27,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid #272727;
   transition: background-color 0.2s;
 }
 
@@ -35,7 +36,7 @@
 }
 
 .category-item:hover {
-  background-color: var(--gray-50);
+  background-color: #1a1a1a;
 }
 
 .category-info {
@@ -52,12 +53,12 @@
 .category-main h3 {
   margin: 0;
   font-size: 1.125rem;
-  color: var(--gray-900);
+  color: #ffffff;
 }
 
 .category-slug {
-  background-color: var(--gray-100);
-  color: var(--gray-600);
+  background-color: #272727;
+  color: #a0a0a0;
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
   font-size: 0.875rem;
@@ -65,7 +66,7 @@
 }
 
 .category-path {
-  color: var(--gray-500);
+  color: #808080;
   font-size: 0.875rem;
 }
 

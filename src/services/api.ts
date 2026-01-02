@@ -2,11 +2,22 @@ import axios from 'axios';
 import type { CategoryRequest, CategoryResponse, PostRequest, PostResponse } from '../types/api';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: '/api',
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.data?.message) {
+      error.message = error.response.data.message;
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const categoryService = {
   getAll: () => api.get<CategoryResponse[]>('/categories').then(res => res.data),

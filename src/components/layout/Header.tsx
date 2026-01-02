@@ -5,9 +5,9 @@ export function Header() {
   return (
     <header className="header">
       <div className="header-container">
-        <Link to="/" className="header-logo">
-          <h1>AbandonedCode</h1>
-        </Link>
+        <div className="header-logo">
+          <h1>abandonedcode</h1>
+        </div>
 
         <nav className="header-nav">
           <Link to="/admin" className="header-link">Posts</Link>

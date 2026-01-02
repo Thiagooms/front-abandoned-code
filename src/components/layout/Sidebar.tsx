@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { categoryService } from '../../services/api';
 import type { CategoryResponse } from '../../types/api';
+import { queryKeys } from '../../constants/queryKeys';
 import './Sidebar.css';
 
 interface CategoryTreeNode extends CategoryResponse {
@@ -17,13 +18,15 @@ function buildCategoryTree(categories: CategoryResponse[]): CategoryTreeNode[] {
   });
 
   categories.forEach(cat => {
-    const node = categoryMap.get(cat.id)!;
-    if (cat.parentId === null) {
-      roots.push(node);
-    } else {
-      const parent = categoryMap.get(cat.parentId);
-      if (parent) {
-        parent.children.push(node);
+    const node = categoryMap.get(cat.id);
+    if (node) {
+      if (cat.parentId === null) {
+        roots.push(node);
+      } else {
+        const parent = categoryMap.get(cat.parentId);
+        if (parent) {
+          parent.children.push(node);
+        }
       }
     }
   });
@@ -50,7 +53,7 @@ function CategoryTreeItem({ category }: { category: CategoryTreeNode }) {
 
 export function Sidebar() {
   const { data: categories, isLoading, error } = useQuery({
-    queryKey: ['categories'],
+    queryKey: queryKeys.categories.all,
     queryFn: categoryService.getAll,
   });
 

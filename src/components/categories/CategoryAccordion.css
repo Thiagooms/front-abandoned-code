@@ -1,0 +1,133 @@
+.category-accordion {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.category-accordion:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.category-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.category-accordion-title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.category-accordion-title:hover {
+  color: var(--primary);
+}
+
+.category-accordion-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.category-accordion-path {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.category-accordion-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.category-accordion-toggle:hover {
+  background: var(--surface-hover);
+  color: var(--primary);
+}
+
+.category-accordion-toggle:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.category-accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.category-accordion-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.category-accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+}
+
+.category-accordion-content.expanded {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 0.5rem 1rem 1rem 1rem;
+}
+
+.category-accordion-children {
+  padding-left: 1.5rem;
+  border-left: 2px solid var(--border);
+}
+
+.category-accordion-children .category-accordion {
+  margin-bottom: 0.5rem;
+}
+
+.category-accordion-children .category-accordion:last-child {
+  margin-bottom: 0;
+}
+
+.category-accordion-children .category-accordion-header {
+  padding: 0.75rem 1rem;
+}
+
+.category-accordion-children .category-accordion-name {
+  font-size: 1rem;
+}
+
+.category-accordion-children .category-accordion-path {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .category-accordion-header {
+    padding: 0.875rem 1rem;
+  }
+
+  .category-accordion-name {
+    font-size: 1rem;
+  }
+
+  .category-accordion-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}

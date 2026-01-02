@@ -1,10 +1,22 @@
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary: #8b5cf6;
+  --primary: #161616;
+  --primary-dark: #2563eb;
+  --secondary: #5b26ca;
   --success: #10b981;
   --danger: #ef4444;
   --warning: #f59e0b;
+
+  --background: #0a0a0a;
+  --surface: #161616;
+  --surface-hover: #0e0e0e;
+  --border: #2a2a2a;
+  --text: #e5e5e5;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #777777;
+
+  --sidebar-bg: #141414;
+  --sidebar-active: #252525;
+
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -15,11 +27,12 @@
   --gray-700: #374151;
   --gray-800: #1f2937;
   --gray-900: #111827;
+
   --radius: 8px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px 0 rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px 0 rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -29,19 +42,18 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--gray-50);
-  color: var(--gray-900);
+  background-color: var(--background);
+  color: var(--text);
   line-height: 1.6;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  background-color: var(--gray-100);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.9em;
@@ -51,6 +63,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
 h1 { font-size: 2.5rem; }
@@ -87,7 +100,9 @@ input, textarea, select {
   font-family: inherit;
   font-size: 0.875rem;
   padding: 0.625rem;
-  border: 1px solid var(--gray-300);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius);
   width: 100%;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -96,7 +111,7 @@ input, textarea, select {
 input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 textarea {
@@ -125,12 +140,14 @@ textarea {
 }
 
 .btn-secondary {
-  background-color: var(--gray-200);
-  color: var(--gray-700);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: var(--gray-300);
+  background-color: var(--bg-card-hover);
+  border-color: var(--border-color-light);
 }
 
 .btn-success {
@@ -157,10 +174,11 @@ textarea {
 }
 
 .card {
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
 }
 
 .badge {
@@ -173,13 +191,15 @@ textarea {
 }
 
 .badge-draft {
-  background-color: var(--gray-200);
-  color: var(--gray-700);
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .badge-published {
-  background-color: #dcfce7;
-  color: #166534;
+  background-color: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .loading {
@@ -187,12 +207,12 @@ textarea {
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  color: var(--gray-500);
+  color: var(--text-secondary);
 }
 
 .error {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
   padding: 1rem;
   border-radius: var(--radius);
   border-left: 4px solid var(--danger);

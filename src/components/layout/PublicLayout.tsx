@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import { PublicHeader } from './PublicHeader';
+import type { ReactNode } from 'react';
 import { PublicSidebar } from './PublicSidebar';
 import './Layout.css';
 
@@ -9,10 +8,9 @@ interface PublicLayoutProps {
 
 export function PublicLayout({ children }: PublicLayoutProps) {
   return (
-    <div className="layout">
-      <PublicHeader />
+    <div className="layout public-layout">
+      <PublicSidebar />
       <div className="layout-container">
-        <PublicSidebar />
         <main className="layout-main">
           {children}
         </main>

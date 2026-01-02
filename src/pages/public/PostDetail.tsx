@@ -1,73 +1,78 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
 import { postService } from '../../services/api';
+import { queryKeys } from '../../constants/queryKeys';
+import { Loading } from '../../components/common/Loading';
+import { ErrorMessage } from '../../components/common/ErrorMessage';
+import { CalendarIcon, EyeIcon } from '../../components/common/Icons';
+import { getErrorMessage } from '../../utils/errorHandler';
+import { formatDate } from '../../utils/dateFormatter';
 import './PostDetail.css';
 
 export function PostDetail() {
   const { id } = useParams<{ id: string }>();
 
   const { data: post, isLoading, error } = useQuery({
-    queryKey: ['post', id],
+    queryKey: queryKeys.posts.byId(id!),
     queryFn: () => postService.getById(Number(id)),
     enabled: !!id,
   });
 
   if (isLoading) {
-    return <div className="loading">Carregando post...</div>;
+    return <Loading />;
   }
 
   if (error || !post) {
-    return (
-      <div className="error">
-        Erro ao carregar post: {error ? (error as Error).message : 'Post não encontrado'}
-      </div>
-    );
+    return <ErrorMessage message={`Erro ao carregar post: ${error ? getErrorMessage(error) : 'Post não encontrado'}`} />;
   }
 
   if (post.status !== 'PUBLISHED') {
     return (
-      <div className="card">
-        <p style={{ textAlign: 'center', color: 'var(--gray-500)' }}>
-          Este post ainda não foi publicado.
-        </p>
+      <div className="home-modern">
+        <div className="home-modern-content">
+          <div className="home-modern-empty">
+            <p>Este post ainda não foi publicado.</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="post-detail">
-      <div className="post-detail-header">
-        <Link to="/" className="btn btn-secondary btn-sm">
-          ← Voltar
-        </Link>
+    <div className="post-detail-modern">
+      <div className="post-detail-container">
+        <article className="post-detail-card">
+          <div className="post-detail-category-badge">
+            {post.category && (
+              <Link
+                to={`/categories/${post.category.slug}`}
+                className="category-badge-link"
+              >
+                {post.category.name}
+              </Link>
+            )}
+          </div>
+
+          <h1 className="post-detail-title-modern">{post.title}</h1>
+
+          <div className="post-detail-meta-modern">
+            {post.publishedAt && (
+              <div className="post-meta-item">
+                <CalendarIcon />
+                <span>{formatDate(post.publishedAt)}</span>
+              </div>
+            )}
+            <div className="post-meta-item">
+              <EyeIcon />
+              <span>{post.viewCount} visualizações</span>
+            </div>
+          </div>
+
+          <div className="post-detail-content-modern">
+            {post.content}
+          </div>
+        </article>
       </div>
-
-      <article className="post-detail-content">
-        <div className="post-detail-meta">
-          {post.category && (
-            <span className="post-category">{post.category.name}</span>
-          )}
-        </div>
-
-        <h1 className="post-detail-title">{post.title}</h1>
-
-        <div className="post-detail-info">
-          {post.publishedAt && (
-            <time>
-              Publicado em {new Date(post.publishedAt).toLocaleDateString('pt-BR', {
-                day: '2-digit',
-                month: 'long',
-                year: 'numeric',
-              })}
-            </time>
-          )}
-          <span>• {post.viewCount} visualizações</span>
-        </div>
-
-        <div className="post-detail-body">
-          {post.content}
-        </div>
-      </article>
     </div>
   );
 }
