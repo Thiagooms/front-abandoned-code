@@ -1,0 +1,130 @@
+.home {
+  max-width: 1000px;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.home-header h1 {
+  margin: 0;
+  color: var(--gray-900);
+}
+
+.posts-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s;
+  border: 1px solid transparent;
+}
+
+.post-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gray-200);
+  transform: translateY(-2px);
+}
+
+.post-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.post-card-meta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.post-category {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.post-views {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+.post-card-title {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.post-card-title h2 {
+  font-size: 1.5rem;
+  color: var(--gray-900);
+  margin: 0;
+  transition: color 0.2s;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.post-card-title:hover h2 {
+  color: var(--primary);
+}
+
+.post-card-excerpt {
+  color: var(--gray-600);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.post-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.post-date {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+}
+
+.post-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .home-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .post-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .post-actions {
+    width: 100%;
+  }
+
+  .post-actions .btn {
+    flex: 1;
+  }
+}

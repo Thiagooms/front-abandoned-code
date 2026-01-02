@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { categoryService } from '../services/api';
-import type { CategoryResponse } from '../types/api';
+import { categoryService } from '../../services/api';
+import type { CategoryResponse } from '../../types/api';
 import './Categories.css';
 
 export function Categories() {
@@ -55,7 +55,7 @@ export function Categories() {
     <div className="categories-page">
       <div className="categories-header">
         <h1>Gerenciar Categorias</h1>
-        <Link to="/categories/new" className="btn btn-primary">
+        <Link to="/admin/categories/new" className="btn btn-primary">
           Criar Nova Categoria
         </Link>
       </div>
@@ -64,7 +64,7 @@ export function Categories() {
         <div className="card">
           <p style={{ textAlign: 'center', color: 'var(--gray-500)' }}>
             Nenhuma categoria criada ainda.{' '}
-            <Link to="/categories/new">Crie a primeira categoria</Link>!
+            <Link to="/admin/categories/new">Crie a primeira categoria</Link>!
           </p>
         </div>
       ) : (

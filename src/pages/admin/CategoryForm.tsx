@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, Link } from 'react-router-dom';
-import { categoryService } from '../services/api';
-import type { CategoryRequest } from '../types/api';
+import { categoryService } from '../../services/api';
+import type { CategoryRequest } from '../../types/api';
 import './CategoryForm.css';
 
 export function CategoryForm() {
@@ -20,7 +20,7 @@ export function CategoryForm() {
     mutationFn: categoryService.create,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['categories'] });
-      navigate('/categories');
+      navigate('/admin/categories');
     },
   });
 
@@ -47,7 +47,7 @@ export function CategoryForm() {
     <div className="category-form-container">
       <div className="category-form-header">
         <h1>Criar Nova Categoria</h1>
-        <Link to="/categories" className="btn btn-secondary btn-sm">
+        <Link to="/admin/categories" className="btn btn-secondary btn-sm">
           Cancelar
         </Link>
       </div>
@@ -99,7 +99,7 @@ export function CategoryForm() {
           <button type="submit" className="btn btn-primary" disabled={createMutation.isPending}>
             {createMutation.isPending ? 'Criando...' : 'Criar Categoria'}
           </button>
-          <Link to="/categories" className="btn btn-secondary">
+          <Link to="/admin/categories" className="btn btn-secondary">
             Cancelar
           </Link>
         </div>

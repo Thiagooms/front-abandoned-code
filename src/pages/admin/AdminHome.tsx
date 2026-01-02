@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { useSearchParams, Link } from 'react-router-dom';
-import { postService } from '../services/api';
-import type { PostResponse } from '../types/api';
-import './Home.css';
+import { postService } from '../../services/api';
+import type { PostResponse } from '../../types/api';
+import './AdminHome.css';
 
-export function Home() {
+export function AdminHome() {
   const [searchParams] = useSearchParams();
   const statusFilter = searchParams.get('status');
 
@@ -30,7 +30,7 @@ export function Home() {
     <div className="home">
       <div className="home-header">
         <h1>Posts</h1>
-        <Link to="/posts/new" className="btn btn-primary">
+        <Link to="/admin/posts/new" className="btn btn-primary">
           Criar Novo Post
         </Link>
       </div>
@@ -39,7 +39,7 @@ export function Home() {
         <div className="card">
           <p style={{ textAlign: 'center', color: 'var(--gray-500)' }}>
             Nenhum post encontrado. {statusFilter && 'Tente remover o filtro ou '}
-            <Link to="/posts/new">Crie seu primeiro post</Link>!
+            <Link to="/admin/posts/new">Crie seu primeiro post</Link>!
           </p>
         </div>
       ) : (
@@ -58,7 +58,7 @@ export function Home() {
                 <span className="post-views">{post.viewCount} views</span>
               </div>
 
-              <Link to={`/posts/${post.id}`} className="post-card-title">
+              <Link to={`/admin/posts/${post.id}`} className="post-card-title">
                 <h2>{post.title}</h2>
               </Link>
 
@@ -74,10 +74,10 @@ export function Home() {
                 </time>
 
                 <div className="post-actions">
-                  <Link to={`/posts/${post.id}/edit`} className="btn btn-sm btn-secondary">
+                  <Link to={`/admin/posts/${post.id}/edit`} className="btn btn-sm btn-secondary">
                     Editar
                   </Link>
-                  <Link to={`/posts/${post.id}`} className="btn btn-sm btn-primary">
+                  <Link to={`/admin/posts/${post.id}`} className="btn btn-sm btn-primary">
                     Ver mais
                   </Link>
                 </div>

@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { postService } from '../services/api';
-import './PostDetail.css';
+import { postService } from '../../services/api';
+import './AdminPostDetail.css';
 
-export function PostDetail() {
+export function AdminPostDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -25,7 +25,7 @@ export function PostDetail() {
   const deleteMutation = useMutation({
     mutationFn: () => postService.delete(Number(id)),
     onSuccess: () => {
-      navigate('/');
+      navigate('/admin');
     },
   });
 
@@ -56,7 +56,7 @@ export function PostDetail() {
   return (
     <div className="post-detail">
       <div className="post-detail-header">
-        <Link to="/" className="btn btn-secondary btn-sm">
+        <Link to="/admin" className="btn btn-secondary btn-sm">
           ← Voltar
         </Link>
 
@@ -70,7 +70,7 @@ export function PostDetail() {
               {publishMutation.isPending ? 'Publicando...' : 'Publicar'}
             </button>
           )}
-          <Link to={`/posts/${post.id}/edit`} className="btn btn-primary btn-sm">
+          <Link to={`/admin/posts/${post.id}/edit`} className="btn btn-primary btn-sm">
             Editar
           </Link>
           <button

@@ -34,7 +34,7 @@ function buildCategoryTree(categories: CategoryResponse[]): CategoryTreeNode[] {
 function CategoryTreeItem({ category }: { category: CategoryTreeNode }) {
   return (
     <li className="category-tree-item">
-      <Link to={`/admin/categories/${category.slug}`} className="category-link">
+      <Link to={`/categories/${category.slug}`} className="category-link">
         {category.name}
       </Link>
       {category.children.length > 0 && (
@@ -48,7 +48,7 @@ function CategoryTreeItem({ category }: { category: CategoryTreeNode }) {
   );
 }
 
-export function Sidebar() {
+export function PublicSidebar() {
   const { data: categories, isLoading, error } = useQuery({
     queryKey: ['categories'],
     queryFn: categoryService.getAll,
@@ -81,12 +81,7 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-section">
-        <div className="sidebar-header">
-          <h3>Categorias</h3>
-          <Link to="/admin/categories/new" className="btn btn-sm btn-primary">
-            +
-          </Link>
-        </div>
+        <h3>Categorias</h3>
 
         {categoryTree.length === 0 ? (
           <p className="sidebar-empty">Nenhuma categoria ainda</p>
@@ -102,14 +97,11 @@ export function Sidebar() {
       <div className="sidebar-section">
         <h3>Filtros</h3>
         <div className="sidebar-filters">
-          <Link to="/admin" className="filter-link">
+          <Link to="/" className="filter-link">
             Todos os Posts
           </Link>
-          <Link to="/admin?status=PUBLISHED" className="filter-link">
+          <Link to="/?status=PUBLISHED" className="filter-link">
             Publicados
-          </Link>
-          <Link to="/admin?status=DRAFT" className="filter-link">
-            Rascunhos
           </Link>
         </div>
       </div>

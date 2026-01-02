@@ -26,6 +26,8 @@
   box-shadow: var(--shadow);
   transition: all 0.3s;
   border: 1px solid transparent;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .post-card:hover {
@@ -73,6 +75,8 @@
   color: var(--gray-900);
   margin: 0;
   transition: color 0.2s;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .post-card-title:hover h2 {
@@ -83,6 +87,8 @@
   color: var(--gray-600);
   line-height: 1.6;
   margin-bottom: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .post-card-footer {

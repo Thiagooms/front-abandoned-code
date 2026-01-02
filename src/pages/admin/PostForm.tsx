@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { postService, categoryService } from '../services/api';
-import type { PostRequest } from '../types/api';
+import { postService, categoryService } from '../../services/api';
+import type { PostRequest } from '../../types/api';
 import './PostForm.css';
 
 export function PostForm() {
@@ -29,7 +29,7 @@ export function PostForm() {
     mutationFn: postService.create,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
-      navigate(`/posts/${data.id}`);
+      navigate(`/admin/posts/${data.id}`);
     },
   });
 
@@ -38,7 +38,7 @@ export function PostForm() {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['posts'] });
       queryClient.invalidateQueries({ queryKey: ['post', id] });
-      navigate(`/posts/${data.id}`);
+      navigate(`/admin/posts/${data.id}`);
     },
   });
 
@@ -78,7 +78,7 @@ export function PostForm() {
     <div className="post-form-container">
       <div className="post-form-header">
         <h1>{isEditMode ? 'Editar Post' : 'Criar Novo Post'}</h1>
-        <Link to={isEditMode ? `/posts/${id}` : '/'} className="btn btn-secondary btn-sm">
+        <Link to={isEditMode ? `/admin/posts/${id}` : '/admin'} className="btn btn-secondary btn-sm">
           Cancelar
         </Link>
       </div>
@@ -141,7 +141,7 @@ export function PostForm() {
           <button type="submit" className="btn btn-primary" disabled={isSaving}>
             {isSaving ? 'Salvando...' : isEditMode ? 'Salvar Alterações' : 'Criar Post'}
           </button>
-          <Link to={isEditMode ? `/posts/${id}` : '/'} className="btn btn-secondary">
+          <Link to={isEditMode ? `/admin/posts/${id}` : '/admin'} className="btn btn-secondary">
             Cancelar
           </Link>
         </div>
